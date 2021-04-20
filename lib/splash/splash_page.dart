@@ -1,4 +1,5 @@
 import 'package:dquiz/core/app_gradients.dart';
+import 'package:dquiz/core/core.dart';
 import 'package:flutter/material.dart';
 
 class SplashPage extends StatelessWidget {
@@ -6,7 +7,12 @@ class SplashPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(gradient: AppGradients.linear),
+        decoration: BoxDecoration(
+          gradient: AppGradients.linear
+        ),
+        child: Center(
+          child: Image.asset(AppImages.logo)
+        ),
       ),
     );
   }
