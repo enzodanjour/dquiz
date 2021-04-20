@@ -9,12 +9,15 @@ class ScoreCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 20,right: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Container(
         height: 136,
-        decoration: BoxDecoration(color: AppColors.white, borderRadius: BorderRadius.circular(15)),
+        decoration: BoxDecoration(
+          color: AppColors.white, 
+          borderRadius: BorderRadius.circular(15)
+        ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
