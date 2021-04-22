@@ -1,4 +1,5 @@
 import 'package:dquiz/chalenge/question_indicator/question_indicator_widget.dart';
+import 'package:dquiz/chalenge/quiz/quiz_widget.dart';
 import 'package:flutter/material.dart';
 
 class ChalengePage extends StatefulWidget {
@@ -14,10 +15,9 @@ class _ChalengePageState extends State<ChalengePage> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(80),
-        child: SafeArea(
-          child: QuestionIndicatorWidget()
-        ),
+        child: SafeArea(child: QuestionIndicatorWidget()),
       ),
+      body: QuizWidget(title: "O que o flutter faz em sua totalidade"),
     );
   }
 }
