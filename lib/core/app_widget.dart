@@ -1,4 +1,5 @@
 
+import 'package:dquiz/chalenge/chalenge_page.dart';
 import 'package:dquiz/home/home_page.dart';
 import 'package:flutter/material.dart';
 
@@ -8,7 +9,7 @@ class AppWidget extends StatelessWidget {
     return MaterialApp(
       title: "DevQuiz",
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: ChalengePage(),
     );
   }
 }
