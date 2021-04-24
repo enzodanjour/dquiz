@@ -8,29 +8,31 @@ class NextButtonWidget extends StatelessWidget {
   final Color fontColor;
   final Color borderColor;
   final Color tapColor;
+  final VoidCallback onTap;
 
   NextButtonWidget(
       {required this.label,
       required this.backgroundColor,
       required this.fontColor,
       required this.borderColor,
-      required this.tapColor
-      }
-  );
+      required this.tapColor,
+      required this.onTap
+      });
 
-  NextButtonWidget.green({required String label})
+  NextButtonWidget.green({required String label,required VoidCallback onTap})
       : this.backgroundColor = AppColors.darkGreen,
         this.fontColor = AppColors.white,
         this.borderColor = AppColors.green,
+        this.onTap = onTap,
         this.label = label,
-        this.tapColor = Colors.greenAccent
-        ;
+        this.tapColor = Colors.greenAccent;
 
-  NextButtonWidget.white({required String label})
+  NextButtonWidget.white({required String label,required VoidCallback onTap})
       : this.backgroundColor = AppColors.white,
         this.fontColor = AppColors.grey,
         this.borderColor = AppColors.border,
         this.label = label,
+        this.onTap = onTap,
         this.tapColor = AppColors.lightGrey;
 
   @override
@@ -39,15 +41,11 @@ class NextButtonWidget extends StatelessWidget {
       height: 48,
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
       child: TextButton(
-        
         style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all(backgroundColor),
-            side:MaterialStateProperty.all(
-              BorderSide(color: borderColor)
-            ),
-            overlayColor:MaterialStateProperty.all(tapColor)
-        ),
-        onPressed: () {},
+            side: MaterialStateProperty.all(BorderSide(color: borderColor)),
+            overlayColor: MaterialStateProperty.all(tapColor)),
+        onPressed: onTap,
         child: Text(
           label,
           style: GoogleFonts.notoSans(
