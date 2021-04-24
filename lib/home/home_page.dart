@@ -1,6 +1,8 @@
+import 'package:dquiz/chalenge/challenge_page.dart';
 import 'package:dquiz/core/core.dart';
 import 'package:dquiz/home/home_controller.dart';
 import 'package:dquiz/home/home_state.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:dquiz/home/widgets/app_bar/app_bar_widget.dart';
@@ -29,9 +31,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     if (controller.state == HomeState.sucess) {
       return Scaffold(
-        appBar: AppBarWidget(
-          user: controller.user!
-        ),
+        appBar: AppBarWidget(user: controller.user!),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
@@ -53,17 +53,23 @@ class _HomePageState extends State<HomePage> {
               ),
               Expanded(
                 child: GridView.count(
-                  crossAxisSpacing: 16,
-                  mainAxisSpacing: 16,
-                  crossAxisCount: 2,
-                  children: controller.quizzes!.map(
-                    (e) => QuizCardWidget(
-                      title: e.title,
-                      completed:'${e.questionAnswered}/${e.questions.length}',
-                      percent: e.questionAnswered / e.questions.length,
-                    )
-                  ).toList()
-                ),
+                    crossAxisSpacing: 16,
+                    mainAxisSpacing: 16,
+                    crossAxisCount: 2,
+                    children: controller.quizzes!
+                        .map((e) => QuizCardWidget(
+                              title: e.title,
+                              completed:
+                                  '${e.questionAnswered}/${e.questions.length}',
+                              percent: e.questionAnswered / e.questions.length,
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  CupertinoPageRoute(builder: (context) => ChallengePage(questions: e.questions,))
+                                );
+                              },
+                            ))
+                        .toList()),
               )
             ],
           ),
