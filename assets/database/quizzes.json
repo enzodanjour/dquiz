@@ -14,6 +14,15 @@
                     {"title": "Muito top", "isRight": true},
                     {"title": "Demais"}
                 ]
+            },
+            {
+                "title": "Está curtindo o flutter",
+                "answers": [
+                    {"title": "Estou curtindo"},
+                    {"title": "Adorei"},
+                    {"title": "Muito top", "isRight": true},
+                    {"title": "Demais"}
+                ]
             }
         ]
     }
