@@ -1,8 +1,10 @@
 import 'package:dquiz/chalenge/challenge_controller.dart';
-import 'package:dquiz/chalenge/next_button/next_button.dart';
+import 'package:dquiz/chalenge/next_button/next_button_widget.dart';
 import 'package:dquiz/chalenge/question_indicator/question_indicator_widget.dart';
 import 'package:dquiz/chalenge/quiz/quiz_widget.dart';
+import 'package:dquiz/result/result_page.dart';
 import 'package:dquiz/shared/models/question_models.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ChallengePage extends StatefulWidget {
@@ -28,9 +30,9 @@ class _ChallengePageState extends State<ChallengePage> {
   }
 
   void nextPage() {
-    if(controller.currentPage< widget.questions.length)
-    pageController.nextPage(
-        duration: Duration(milliseconds: 100), curve: Curves.linear);
+    if (controller.currentPage < widget.questions.length)
+      pageController.nextPage(
+          duration: Duration(milliseconds: 100), curve: Curves.linear);
   }
 
   @override
@@ -70,15 +72,16 @@ class _ChallengePageState extends State<ChallengePage> {
                       children: [
                         // if (value < widget.questions.length)
                         Expanded(
-                          child: NextButtonWidget.white(
-                            label: "Pular", onTap: nextPage)
-                        ),
+                            child: NextButtonWidget.white(
+                                label: "Pular", onTap: nextPage)),
                         if (value == widget.questions.length)
                           Expanded(
                               child: NextButtonWidget.green(
                                   label: "Confirmar",
                                   onTap: () {
-                                    Navigator.pop(context);
+                                    Navigator.push(context,
+                                        CupertinoPageRoute(builder: (context) => ResultPage()
+                                      ));
                                   }))
                       ],
                     ))),
