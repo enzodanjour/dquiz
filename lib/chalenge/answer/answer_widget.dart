@@ -7,9 +7,14 @@ class AnswerWidget extends StatelessWidget {
   final AnswerModel answer;
   final bool isSelected;
   final bool disabled;
-  final VoidCallback onTap;
+  final ValueChanged<bool> onTap;
 
-  const AnswerWidget({Key? key, required this.answer,required this.onTap,required this.disabled, this.isSelected = false})
+  const AnswerWidget(
+      {Key? key,
+      required this.answer,
+      required this.onTap,
+      required this.disabled,
+      this.isSelected = false})
       : super(key: key);
 
   Color get _selectedColorRight =>
@@ -36,7 +41,9 @@ class AnswerWidget extends StatelessWidget {
       child: IgnorePointer(
         ignoring: disabled,
         child: GestureDetector(
-          onTap: onTap,
+          onTap: () {
+            onTap(answer.isRight);
+          },
           child: Container(
             padding: EdgeInsets.all(16),
             decoration: BoxDecoration(
@@ -52,8 +59,9 @@ class AnswerWidget extends StatelessWidget {
                 Expanded(
                   child: Text(
                     answer.title,
-                    style:
-                        isSelected ? _selectedTextStyleRight : AppTextStyles.body,
+                    style: isSelected
+                        ? _selectedTextStyleRight
+                        : AppTextStyles.body,
                   ),
                 ),
                 Container(

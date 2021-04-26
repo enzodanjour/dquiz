@@ -1,39 +1,86 @@
 import 'package:dquiz/chalenge/next_button/next_button_widget.dart';
 import 'package:dquiz/core/core.dart';
 import 'package:flutter/material.dart';
+import 'package:share_plus/share_plus.dart';
 
 class ResultPage extends StatelessWidget {
-  const ResultPage({Key? key}) : super(key: key);
+  final String title;
+  final int length;
+  final int result;
+  const ResultPage(
+      {Key? key,
+      required this.title,
+      required this.length,
+      required this.result})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         width: double.maxFinite,
+        padding: EdgeInsets.only(top: 100),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Center(
-              child: Text('Parabéns', 
-                style: AppTextStyles.heading40
-              ),
+            Image.asset(AppImages.trophy),
+            Column(
+              children: [
+                Center(
+                  child: Text('Parabéns', style: AppTextStyles.heading40),
+                ),
+                SizedBox(
+                  height: 16,
+                ),
+                Text.rich(
+                  TextSpan(
+                      text: 'Você concluiu',
+                      style: AppTextStyles.body,
+                      children: [
+                        TextSpan(
+                            text: '\n$title', style: AppTextStyles.bodyBold),
+                        TextSpan(
+                            text: '\n Com $result de $length',
+                            style: AppTextStyles.body),
+                      ]),
+                  textAlign: TextAlign.center,
+                ),
+              ],
             ),
-            SizedBox(
-              height: 16,
-            ),
-            Text.rich(
-              TextSpan(
-              text: 'Você concluiu',style: AppTextStyles.body,
-                children: [
-                  TextSpan(text:'\nGerenciamento de estado',style: AppTextStyles.bodyBold),
-                  TextSpan(text:'\n Com 6 de 10',style: AppTextStyles.body),
-                ]
-              ),
-              textAlign: TextAlign.center,
-            ), 
-            NextButtonWidget.purple(label:'Compartilhar' ,onTap: (){}),
-            NextButtonWidget.transparent(label:'Voltar ao início' ,onTap: (){})
+            Column(
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                        child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 68),
+                      child: NextButtonWidget.purple(
+                          label: 'Compartilhar',
+                          onTap: () {
+                            Share.share('Resultado do quiz $title\n Obtive${(result/length)}% de aproveitamento');
+                          }),
+                    )),
+                  ],
+                ),
+                SizedBox(
+                  height: 24,
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                        child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 68),
+                      child: NextButtonWidget.white(
+                          label: 'Voltar ao início',
+                          onTap: () {
+                            Navigator.pop(context);
+                          }),
+                    )),
+                  ],
+                ),
+              ],
+            )
           ],
         ),
       ),
